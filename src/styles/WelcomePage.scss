@@ -1,0 +1,50 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  background-color: #6564db;
+
+  .info-block {
+    height: 445px;
+    background-color: #fff;
+    border-radius: 40px 40px 0px 0px;
+
+    .app-title {
+      margin: 0;
+      font-family: "TT Firs Neue";
+      font-style: normal;
+      text-align: center;
+      letter-spacing: -0.333333px;
+      color: #6564db;
+
+      &-primary {
+        margin-top: 29px;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 52px;
+      }
+
+      &-secondary {
+        position: relative;
+        bottom: 8px;
+        font-weight: normal;
+        font-size: 19px;
+        line-height: 25px;
+      }
+    }
+
+    .table-info {
+      margin-top: 116px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      letter-spacing: -0.333333px;
+      color: #000000;
+    }
+  }
+}
