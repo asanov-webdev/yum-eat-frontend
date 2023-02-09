@@ -1,0 +1,97 @@
+.menu-wrapper {
+  font-family: "TT Firs Neue";
+  background-color: #f8f6f3;
+  height: 100vh;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+
+    h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    button {
+      height: 20px;
+    }
+  }
+
+  .categories {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px;
+
+    .category {
+      padding-top: 6px;
+      padding-bottom: 5px;
+      min-width: 70px;
+      font-size: 15px;
+      line-height: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(101, 100, 219, 0.1);
+      border-radius: 10px;
+
+      &:not(:last-of-type) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .dishes {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: calc((100% - 20px) / 2) calc((100% - 20px) / 2);
+    column-gap: 20px;
+    row-gap: 30px;
+    padding: 20px;
+
+    .dish-wrapper {
+      position: relative;
+
+      .dish {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 12px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 1.25px 1.25px 15px 2px rgba(0, 0, 0, 0.06);
+
+        img {
+          position: relative;
+          bottom: 10px;
+          width: 125px;
+          height: 125px;
+        }
+
+        h4 {
+          position: relative;
+          bottom: 10px;
+          font-size: 15px;
+          font-weight: normal;
+          margin-top: 7px;
+          margin-bottom: 5px;
+        }
+      }
+
+      .bottom-border {
+        width: 100%;
+        height: 100px;
+        border-radius: 20px;
+        position: absolute;
+        bottom: -8px;
+        z-index: 1;
+        background-color: #ff8811;
+      }
+    }
+  }
+}
