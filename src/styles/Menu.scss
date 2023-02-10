@@ -7,10 +7,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 30px;
+    padding: 13px 20px 12px 34px;
 
     h1 {
       font-size: 20px;
+      font-weight: 500;
       margin: 0;
     }
 
@@ -37,6 +38,10 @@
       background-color: rgba(101, 100, 219, 0.1);
       border-radius: 10px;
 
+      &-active {
+        background-color: #fff;
+      }
+
       &:not(:last-of-type) {
         margin-right: 20px;
       }
@@ -49,8 +54,8 @@
     align-items: center;
     grid-template-columns: calc((100% - 20px) / 2) calc((100% - 20px) / 2);
     column-gap: 20px;
-    row-gap: 30px;
-    padding: 20px;
+    row-gap: 23px;
+    padding: 19px 29px;
 
     .dish-wrapper {
       position: relative;
@@ -62,24 +67,55 @@
         flex-direction: column;
         align-items: center;
         padding: 0 12px;
+        padding-bottom: 9px;
         border-radius: 20px;
         background-color: #fff;
         box-shadow: 1.25px 1.25px 15px 2px rgba(0, 0, 0, 0.06);
 
         img {
           position: relative;
-          bottom: 10px;
+          bottom: 5px;
           width: 125px;
           height: 125px;
         }
 
         h4 {
           position: relative;
-          bottom: 10px;
+          bottom: 5px;
           font-size: 15px;
           font-weight: normal;
           margin-top: 7px;
-          margin-bottom: 5px;
+          margin-bottom: 0;
+        }
+
+        .change-count-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(101, 100, 219, 0.1);
+          border-radius: 20px;
+          border: 0;
+          padding: 2px 6px;
+
+          .count {
+            font-family: "TT Firs Neue";
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.4);
+            margin: 0px 7px;
+            position: relative;
+            top: 1px;
+
+            &-bold {
+              font-weight: bold;
+              color: black;
+            }
+          }
+
+          svg {
+            font-size: 16px;
+            color: #6564db;
+          }
         }
       }
 

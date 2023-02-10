@@ -10,6 +10,12 @@ body {
 
 @font-face {
   font-family: "TT Firs Neue";
+  src: url("styles/fonts/TTFirsNeue-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "TT Firs Neue";
   src: url("styles/fonts/TTFirsNeue-Bold.ttf") format("truetype");
   font-weight: bold;
 }
