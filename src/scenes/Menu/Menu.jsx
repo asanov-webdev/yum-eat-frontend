@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 import 'styles/Menu.scss'
@@ -9,16 +9,24 @@ import { DishCard } from './DishCard'
 
 const mockCategories = ['Супы', 'Салаты', 'Пицца', 'Напитки']
 const mockDishes = [
-    'Название пиццы',
-    'Название пиццы',
-    'Название пиццы',
-    'Название пиццы',
-    'Название пиццы',
-    'Название пиццы',
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
+    { title: 'Название пиццы', category: 'Пицца', priceInRubles: 319 },
 ]
 
 export function Menu() {
     const [activeCategories, setActiveCategories] = useState([])
+
+    const currentDishes = useMemo(() => {
+        if (activeCategories.length > 0) {
+            return mockDishes.filter(dish => activeCategories.includes(dish.category))
+        }
+
+        return mockDishes
+    }, [activeCategories])
 
     return (
         <div className="menu-wrapper">
@@ -43,8 +51,8 @@ export function Menu() {
                 ))}
             </div>
             <div className="dishes">
-                {mockDishes.map(dish => (
-                    <DishCard title={dish} img={pizzaImg} />
+                {currentDishes.map(dish => (
+                    <DishCard title={dish.title} img={pizzaImg} />
                 ))}
             </div>
         </div>
