@@ -56,6 +56,7 @@
     column-gap: 20px;
     row-gap: 23px;
     padding: 19px 29px;
+    padding-bottom: 0;
 
     .dish-wrapper {
       position: relative;
@@ -88,7 +89,7 @@
           margin-bottom: 0;
         }
 
-        .change-count-btn {
+        .change-amount-btn {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -97,7 +98,7 @@
           border: 0;
           padding: 2px 6px;
 
-          .count {
+          .amount {
             font-family: "TT Firs Neue";
             font-size: 15px;
             font-weight: 500;
@@ -127,6 +128,46 @@
         bottom: -8px;
         z-index: 1;
         background-color: #ff8811;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px 20px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    z-index: 2;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 35px;
+      background-color: #ff8811;
+      width: 100%;
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-family: "TT Firs Neue";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 19px;
+      text-align: center;
+
+      span:first-of-type {
+        position: relative;
+        left: 40%;
+      }
+
+      span:last-of-type {
+        position: relative;
+        right: 5%;
       }
     }
   }
