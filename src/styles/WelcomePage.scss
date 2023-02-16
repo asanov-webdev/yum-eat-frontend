@@ -46,5 +46,11 @@
       letter-spacing: -0.333333px;
       color: #000000;
     }
+
+    .loader-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
