@@ -53,7 +53,7 @@
     display: grid;
     justify-items: center;
     align-items: center;
-    grid-template-columns: calc((100% - 20px) / 2) calc((100% - 20px) / 2);
+    grid-template-columns: 150px 150px;
     column-gap: 20px;
     row-gap: 23px;
     padding: 19px 29px;
@@ -61,6 +61,7 @@
 
     .dish-wrapper {
       position: relative;
+      width: 100%;
 
       .dish {
         position: relative;
@@ -87,7 +88,12 @@
           font-size: 15px;
           font-weight: normal;
           margin-top: 7px;
-          margin-bottom: 0;
+          margin-bottom: 0;    
+          width: 100%;
+          text-overflow: ellipsis;
+          text-align: center;
+          overflow: hidden;
+          white-space: nowrap;
         }
 
         .change-amount-btn {

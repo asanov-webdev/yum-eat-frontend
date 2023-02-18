@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add'
 import 'styles/Menu.scss'
 import classNames from 'classnames'
 
-export function DishCard({ id, title, img, cart, onAdd, onRemove }) {
+export function DishCard({ id, name, img, cart, onAdd, onRemove }) {
     const amount = useMemo(() => {
         if (cart[id]) {
             return cart[id]
@@ -17,8 +17,8 @@ export function DishCard({ id, title, img, cart, onAdd, onRemove }) {
     return (
         <div className="dish-wrapper">
             <div className="dish">
-                <img src={img} alt={title} />
-                <h4>{title}</h4>
+                <img src={img} alt={name} />
+                <h4>{name}</h4>
                 <button className="change-amount-btn" type="button">
                     <RemoveIcon onClick={() => { onRemove(id) }} />
                     <span className={classNames('amount', { 'amount-bold': amount > 0 })}>{amount}</span>
@@ -32,7 +32,7 @@ export function DishCard({ id, title, img, cart, onAdd, onRemove }) {
 
 DishCard.propTypes = {
     id: PropTypes.number,
-    title: PropTypes.string,
+    name: PropTypes.string,
     img: PropTypes.any,
     cart: PropTypes.object,
     onAdd: PropTypes.func,

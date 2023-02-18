@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import 'styles/Menu.scss'
 import debounce from 'lodash.debounce'
@@ -7,12 +8,40 @@ import pizzaImg from 'styles/img/pizza.png'
 import searchIcon from 'styles/icons/search.png'
 
 import { DishCard } from './DishCard'
-import { mockCategories, mockDishes } from './mock'
 
 const SEARCH_MIN_LENGTH = 2
 const SEARCH_DELAY_IN_MILLISECONDS = 300
 
-export function Menu() {
+export function Menu({ location }) {
+    const { dishesObj } = location.state
+
+    const [value, setValue] = useState({
+        categories: [],
+        dishes: [],
+    })
+
+    useEffect(() => {
+        const categories = dishesObj.categories.map((cat => cat.name))
+        const dishes = []
+
+        dishesObj.categories.forEach((cat) => {
+            cat.dishes.forEach((dish) => {
+                const formattedDish = {
+                    id: dish.id,
+                    name: dish.name,
+                    category: cat.name,
+                    priceInRubles: dish.sizes[0].price || 0,
+                    imgUrl: dish.sizes[0].imageUrl,
+                }
+
+                dishes.push(formattedDish)
+            })
+        })
+
+        setValue({ categories, dishes })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const [activeCategories, setActiveCategories] = useState([])
     const [cart, setCart] = useState({})
     const [isInSearchMode, setIsInSearchMode] = useState(false)
@@ -21,17 +50,17 @@ export function Menu() {
 
     const dishesByCategory = useMemo(() => {
         if (activeCategories.length > 0) {
-            return mockDishes.filter(dish => activeCategories.includes(dish.category))
+            return value.dishes.filter(dish => activeCategories.includes(dish.category))
         }
 
-        return mockDishes
-    }, [activeCategories])
+        return value.dishes
+    }, [activeCategories, value.dishes])
 
     const handleSearch = debounce(
         () => {
             if (searchValue.length > SEARCH_MIN_LENGTH) {
                 setDishesBySearchValue(
-                    mockDishes.filter(dish => dish.title.toLowerCase().includes(searchValue.toLowerCase())),
+                    value.dishes.filter(dish => dish.name.toLowerCase().includes(searchValue.toLowerCase())),
                 )
             } else if (!searchValue) {
                 setDishesBySearchValue([])
@@ -69,10 +98,11 @@ export function Menu() {
 
         Object.entries(cart).forEach(([id, amount]) => {
             // eslint-disable-next-line eqeqeq
-            totalPrice += mockDishes.find(dish => dish.id == id).priceInRubles * amount
+            totalPrice += value.dishes.find(dish => dish.id == id).priceInRubles * amount
         })
 
         return totalPrice
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
     const handleExitSearch = () => {
@@ -92,7 +122,7 @@ export function Menu() {
                             <DishCard
                                 key={dish.id}
                                 id={dish.id}
-                                title={dish.title}
+                                name={dish.name}
                                 img={pizzaImg}
                                 cart={cart}
                                 onAdd={addDishToCart}
@@ -123,7 +153,7 @@ export function Menu() {
 
             </div>
             <div className="categories">
-                {mockCategories.map(cat => (
+                {value.categories.map(cat => (
                     <div
                         key={cat}
                         className={classNames('category', { 'category-active': activeCategories.includes(cat) })}
@@ -144,8 +174,8 @@ export function Menu() {
                     <DishCard
                         key={dish.id}
                         id={dish.id}
-                        title={dish.title}
-                        img={pizzaImg}
+                        name={dish.name}
+                        img={dish.imgUrl}
                         cart={cart}
                         onAdd={addDishToCart}
                         onRemove={removeDishFromCart}
@@ -162,4 +192,8 @@ export function Menu() {
             )}
         </div>
     )
+}
+
+Menu.propTypes = {
+    location: PropTypes.object,
 }

@@ -6,7 +6,7 @@ import 'styles/WelcomePage.scss'
 import { DISHES_ENDPOINT, WELCOME_PAGE_WAITING_TIME_IN_SECONDS } from './constants'
 
 export function WelcomePage() {
-    const [dishes, setDishes] = useState()
+    const [dishesObj, setDishesObj] = useState()
     const [waitingTimePassed, setWaitingTimePassed] = useState(false)
 
     const timeStart = new Date()
@@ -14,7 +14,7 @@ export function WelcomePage() {
     const getApiData = async () => {
         const response = await fetch(DISHES_ENDPOINT).then(response => response.json())
 
-        setDishes(response)
+        setDishesObj(response)
     }
 
     useEffect(() => {
@@ -33,13 +33,14 @@ export function WelcomePage() {
         }, 1000)
 
         return () => clearInterval(interval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (dishes && waitingTimePassed) {
+    if (dishesObj && waitingTimePassed) {
         return (
             <Redirect to={{
                 pathname: '/menu',
-                state: { dishes },
+                state: { dishesObj },
             }}
             />
         )
