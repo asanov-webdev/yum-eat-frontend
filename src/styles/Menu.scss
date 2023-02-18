@@ -3,6 +3,19 @@
   background-color: #f8f6f3;
   height: 100vh;
 
+  .loader-wrapper {
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .header {
     display: flex;
     align-items: center;
@@ -88,7 +101,7 @@
           font-size: 15px;
           font-weight: normal;
           margin-top: 7px;
-          margin-bottom: 0;    
+          margin-bottom: 0;
           width: 100%;
           text-overflow: ellipsis;
           text-align: center;

@@ -31,7 +31,7 @@ export function DishCard({ id, name, img, cart, onAdd, onRemove }) {
 }
 
 DishCard.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     img: PropTypes.any,
     cart: PropTypes.object,

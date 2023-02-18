@@ -3,24 +3,32 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import 'styles/Menu.scss'
 import debounce from 'lodash.debounce'
+import isEmpty from 'lodash/isEmpty'
+import { CircularProgress } from '@mui/material'
 
 import pizzaImg from 'styles/img/pizza.png'
 import searchIcon from 'styles/icons/search.png'
 
 import { DishCard } from './DishCard'
+import { SEND_ORDER_ENDPOINT } from './constants'
 
 const SEARCH_MIN_LENGTH = 2
 const SEARCH_DELAY_IN_MILLISECONDS = 300
 
 export function Menu({ location }) {
-    const { dishesObj } = location.state
+    const { dishesObj = {} } = location.state || {}
 
+    const [sendingData, setSendingData] = useState(false)
     const [value, setValue] = useState({
         categories: [],
         dishes: [],
     })
 
     useEffect(() => {
+        if (isEmpty(dishesObj)) {
+            return
+        }
+
         const categories = dishesObj.categories.map((cat => cat.name))
         const dishes = []
 
@@ -111,6 +119,35 @@ export function Menu({ location }) {
         setDishesBySearchValue([])
     }
 
+    const formattedData = useMemo(() => {
+        const orders = []
+
+        Object.entries(cart).forEach(([id, amount]) => {
+            const formattedOrder = {
+                dish_id: id,
+                amount,
+            }
+
+            orders.push(formattedOrder)
+        })
+
+        return JSON.stringify({ orders })
+    }, [cart])
+
+    const sendData = async () => {
+        setSendingData(true)
+
+        await fetch(SEND_ORDER_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: formattedData,
+        }).finally(() => {
+            setSendingData(false)
+        })
+    }
+
     if (isInSearchMode) {
         return (
             <div className="menu-wrapper">
@@ -145,6 +182,11 @@ export function Menu({ location }) {
 
     return (
         <div className="menu-wrapper">
+            {sendingData && (
+                <div className="loader-wrapper">
+                    <CircularProgress />
+                </div>
+            )}
             <div className="header">
                 <h1>Меню</h1>
                 <button onClick={() => { setIsInSearchMode(true) }} type="button">
@@ -184,8 +226,8 @@ export function Menu({ location }) {
             </div>
             {cartTotalPrice > 0 && (
                 <div className="footer">
-                    <button type="button">
-                        <span>Корзина</span>
+                    <button type="button" onClick={sendData}>
+                        <span>Заказать</span>
                         <span>{`${cartTotalPrice} руб.`}</span>
                     </button>
                 </div>
