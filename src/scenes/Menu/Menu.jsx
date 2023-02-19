@@ -235,6 +235,7 @@ export function Menu({ location }) {
                         key={dish.id}
                         id={dish.id}
                         name={dish.name}
+                        price={dish.priceInRubles}
                         img={dish.imgUrl || noImg}
                         cart={cart}
                         onAdd={addDishToCart}
