@@ -2,10 +2,14 @@ import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
-import 'styles/Menu.scss'
 import classNames from 'classnames'
 
-export function DishCard({ id, name, price, img, cart, onAdd, onRemove }) {
+import noImg from 'styles/img/no_img.png'
+import 'styles/Menu.scss'
+
+export function DishCard({ dish, cart, onAdd, onRemove, onDishClick }) {
+    const { id, name, priceInRubles, imgUrl } = dish
+
     const amount = useMemo(() => {
         if (cart[id]) {
             return cart[id]
@@ -17,13 +21,15 @@ export function DishCard({ id, name, price, img, cart, onAdd, onRemove }) {
     return (
         <div className="dish-wrapper">
             <div className="dish">
-                <img src={img} alt={name} />
-                <h4>{name}</h4>
-                <h4>
-                    {price}
-                    {' '}
-                    руб.
-                </h4>
+                <div className="click-wrapper" onClick={() => { onDishClick(dish) }}>
+                    <img src={imgUrl || noImg} alt={name} />
+                    <h4>{name}</h4>
+                    <h4>
+                        {priceInRubles}
+                        {' '}
+                        руб.
+                    </h4>
+                </div>
                 <button className="change-amount-btn" type="button">
                     <RemoveIcon onClick={() => { onRemove(id) }} />
                     <span className={classNames('amount', { 'amount-bold': amount > 0 })}>{amount}</span>
@@ -36,11 +42,9 @@ export function DishCard({ id, name, price, img, cart, onAdd, onRemove }) {
 }
 
 DishCard.propTypes = {
-    id: PropTypes.string,
-    name: PropTypes.string,
-    price: PropTypes.number,
-    img: PropTypes.any,
+    dish: PropTypes.object,
     cart: PropTypes.object,
     onAdd: PropTypes.func,
     onRemove: PropTypes.func,
+    onDishClick: PropTypes.func,
 }

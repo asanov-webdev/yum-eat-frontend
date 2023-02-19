@@ -6,12 +6,13 @@ import debounce from 'lodash.debounce'
 import isEmpty from 'lodash/isEmpty'
 import { CircularProgress } from '@mui/material'
 
-import noImg from 'styles/img/no_img.png'
 import searchIcon from 'styles/icons/search.png'
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
+import infoImg from 'styles/img/info_img.png'
 
 import { DishCard } from './DishCard'
 import { SEND_ORDER_ENDPOINT } from './constants'
+import { mockDishDescription } from './mock'
 
 const SEARCH_MIN_LENGTH = 2
 const SEARCH_DELAY_IN_MILLISECONDS = 300
@@ -54,6 +55,7 @@ export function Menu({ location }) {
     const [activeCategories, setActiveCategories] = useState([])
     const [cart, setCart] = useState({})
     const [isInSearchMode, setIsInSearchMode] = useState(false)
+    const [infoModeDish, setInfoModeDish] = useState(null)
     const [searchValue, setSearchValue] = useState('')
     const [dishesBySearchValue, setDishesBySearchValue] = useState([])
 
@@ -175,9 +177,7 @@ export function Menu({ location }) {
                             {dishesBySearchValue.map(dish => (
                                 <DishCard
                                     key={dish.id}
-                                    id={dish.id}
-                                    name={dish.name}
-                                    img={dish.imgUrl || noImg}
+                                    dish={dish}
                                     cart={cart}
                                     onAdd={addDishToCart}
                                     onRemove={removeDishFromCart}
@@ -194,6 +194,37 @@ export function Menu({ location }) {
                         </div>
                     )}
                 </div>
+            </div>
+        )
+    }
+
+    if (infoModeDish) {
+        return (
+            <div className="menu-wrapper info-mode">
+                {sendingData && (
+                    <div className="loader-wrapper">
+                        <CircularProgress />
+                    </div>
+                )}
+                <div className="header">
+                    <h1>Меню</h1>
+                </div>
+                <div className="info-wrapper">
+                    <h2>{infoModeDish.name}</h2>
+                    <img src={infoImg} alt="infoImg" />
+                    <p>{mockDishDescription}</p>
+                    <p className="text-bold">
+                        Ингредиенты, калорийность, БЖУ
+                    </p>
+                </div>
+                {cartTotalPrice > 0 && (
+                    <div className="footer">
+                        <button type="button" onClick={sendData}>
+                            <span>Заказать</span>
+                            <span>{`${cartTotalPrice} руб.`}</span>
+                        </button>
+                    </div>
+                )}
             </div>
         )
     }
@@ -233,13 +264,11 @@ export function Menu({ location }) {
                 {dishesByCategory.map(dish => (
                     <DishCard
                         key={dish.id}
-                        id={dish.id}
-                        name={dish.name}
-                        price={dish.priceInRubles}
-                        img={dish.imgUrl || noImg}
+                        dish={dish}
                         cart={cart}
                         onAdd={addDishToCart}
                         onRemove={removeDishFromCart}
+                        onDishClick={setInfoModeDish}
                     />
                 ))}
             </div>
