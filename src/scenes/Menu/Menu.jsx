@@ -8,6 +8,7 @@ import { CircularProgress } from '@mui/material'
 
 import noImg from 'styles/img/no_img.png'
 import searchIcon from 'styles/icons/search.png'
+import arrowLeftIcon from 'styles/icons/arrow_left.png'
 
 import { DishCard } from './DishCard'
 import { SEND_ORDER_ENDPOINT } from './constants'
@@ -156,31 +157,43 @@ export function Menu({ location }) {
     if (isInSearchMode) {
         return (
             <div className="menu-wrapper">
-                <button type="button" onClick={handleExitSearch}>Назад</button>
-                <input type="text" placeholder="Поиск" onChange={(e) => { setSearchValue(e.target.value) }} />
-                {dishesBySearchValue.length > 0 ? (
-                    <div className="dishes">
-                        {dishesBySearchValue.map(dish => (
-                            <DishCard
-                                key={dish.id}
-                                id={dish.id}
-                                name={dish.name}
-                                img={dish.imgUrl || noImg}
-                                cart={cart}
-                                onAdd={addDishToCart}
-                                onRemove={removeDishFromCart}
-                            />
-                        ))}
-                    </div>
-                ) : <p>Введите название блюда</p>}
-                {cartTotalPrice > 0 && (
-                    <div className="footer">
-                        <button type="button">
-                            <span>Корзина</span>
-                            <span>{`${cartTotalPrice} руб.`}</span>
+                <div className="search-wrapper">
+                    <div className="input-line">
+                        <button type="button" onClick={handleExitSearch}>
+                            <img src={arrowLeftIcon} alt="back" />
                         </button>
+                        <input
+                            className={classNames('search-input', { filled: searchValue.length > 0 })}
+                            type="text"
+                            placeholder="Поиск"
+                            value={searchValue}
+                            onChange={(e) => { setSearchValue(e.target.value) }}
+                        />
                     </div>
-                )}
+                    {dishesBySearchValue.length > 0 ? (
+                        <div className="dishes">
+                            {dishesBySearchValue.map(dish => (
+                                <DishCard
+                                    key={dish.id}
+                                    id={dish.id}
+                                    name={dish.name}
+                                    img={dish.imgUrl || noImg}
+                                    cart={cart}
+                                    onAdd={addDishToCart}
+                                    onRemove={removeDishFromCart}
+                                />
+                            ))}
+                        </div>
+                    ) : <div className="filtered-dishes-placeholder"><p>Введите название блюда</p></div>}
+                    {cartTotalPrice > 0 && (
+                        <div className="footer">
+                            <button type="button">
+                                <span>Корзина</span>
+                                <span>{`${cartTotalPrice} руб.`}</span>
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         )
     }
