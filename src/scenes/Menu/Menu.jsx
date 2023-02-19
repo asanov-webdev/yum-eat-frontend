@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce'
 import isEmpty from 'lodash/isEmpty'
 import { CircularProgress } from '@mui/material'
 
-import pizzaImg from 'styles/img/pizza.png'
+import noImg from 'styles/img/no_img.png'
 import searchIcon from 'styles/icons/search.png'
 
 import { DishCard } from './DishCard'
@@ -97,6 +97,11 @@ export function Menu({ location }) {
 
         if (newCart[dishId] && newCart[dishId] > 0) {
             newCart[dishId] -= 1
+
+            if (newCart[dishId] === 0) {
+                delete newCart[dishId]
+            }
+
             setCart(newCart)
         }
     }
@@ -160,7 +165,7 @@ export function Menu({ location }) {
                                 key={dish.id}
                                 id={dish.id}
                                 name={dish.name}
-                                img={pizzaImg}
+                                img={dish.imgUrl || noImg}
                                 cart={cart}
                                 onAdd={addDishToCart}
                                 onRemove={removeDishFromCart}
@@ -217,7 +222,7 @@ export function Menu({ location }) {
                         key={dish.id}
                         id={dish.id}
                         name={dish.name}
-                        img={dish.imgUrl}
+                        img={dish.imgUrl || noImg}
                         cart={cart}
                         onAdd={addDishToCart}
                         onRemove={removeDishFromCart}
