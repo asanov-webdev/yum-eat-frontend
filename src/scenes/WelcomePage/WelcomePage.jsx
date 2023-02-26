@@ -1,20 +1,47 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
-
 import 'styles/WelcomePage.scss'
+import { useDispatch } from 'react-redux'
+
+import { initializeMenu } from 'redux/actions'
+
 import { DISHES_ENDPOINT, WELCOME_PAGE_WAITING_TIME_IN_SECONDS } from './constants'
 
 export function WelcomePage() {
-    const [dishesObj, setDishesObj] = useState()
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
     const [waitingTimePassed, setWaitingTimePassed] = useState(false)
+    const [dataIsLoaded, setDataIsLoaded] = useState(false)
 
     const timeStart = new Date()
 
+    // Получение данных по блюдам и категориям с сервера
     const getApiData = async () => {
         const response = await fetch(DISHES_ENDPOINT).then(response => response.json())
 
-        setDishesObj(response)
+        const categories = response.categories.map((cat => cat.name))
+        const dishes = []
+
+        response.categories.forEach((cat) => {
+            cat.dishes.forEach((dish) => {
+                const formattedDish = {
+                    id: dish.id,
+                    name: dish.name,
+                    category: cat.name,
+                    priceInRubles: dish.sizes[0].price || 0,
+                    imgUrl: dish.sizes[0].imageUrl,
+                }
+
+                dishes.push(formattedDish)
+            })
+        })
+
+        dispatch(initializeMenu(dishes, categories))
+
+        setDataIsLoaded(true)
     }
 
     useEffect(() => {
@@ -36,14 +63,10 @@ export function WelcomePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (dishesObj && waitingTimePassed) {
-        return (
-            <Redirect to={{
-                pathname: '/menu',
-                state: { dishesObj },
-            }}
-            />
-        )
+    if (dataIsLoaded && waitingTimePassed) {
+        navigate('/menu')
+        // pathname: '/menu',
+        // state: { dishesObj },
     }
 
     return (
