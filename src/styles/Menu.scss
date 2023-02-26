@@ -135,23 +135,23 @@
     padding: 10px;
 
     .category {
-      padding-top: 6px;
-      padding-bottom: 5px;
-      min-width: 70px;
+      padding: 6px;
+      min-width: 64px;
       font-size: 15px;
       line-height: 19px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background-color: rgba(101, 100, 219, 0.1);
       border-radius: 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: center;
 
       &-active {
         background-color: #fff;
       }
 
       &:not(:last-of-type) {
-        margin-right: 20px;
+        margin-right: 18px;
       }
     }
   }
