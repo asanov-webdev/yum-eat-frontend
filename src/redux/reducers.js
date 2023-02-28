@@ -36,6 +36,11 @@ const menuReducer = (state = initialState, action = {}) => {
 
             return { ...state, cart: newCart }
 
+        case 'REMOVE_ALL_DISH_ENTRIES_FROM_CART':
+            delete newCart[dishId]
+
+            return { ...state, cart: newCart }
+
         case 'CHANGE_VIEW_MODE':
             return { ...state, viewMode }
 

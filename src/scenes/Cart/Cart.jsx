@@ -3,8 +3,10 @@ import { CircularProgress } from '@mui/material'
 import 'styles/Cart.scss'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import isEmpty from 'lodash/isEmpty'
 
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
+import { DishCard } from 'scenes/Menu/DishCard'
 
 import { SEND_ORDER_ENDPOINT } from './constants'
 
@@ -57,6 +59,8 @@ export function Cart() {
         })
     }
 
+    const cartDishes = useMemo(() => (isEmpty(cart) ? [] : dishes.filter(dish => dish.id in cart)), [cart, dishes])
+
     return (
         <div className="cart-wrapper">
             {sendingData && (
@@ -70,12 +74,24 @@ export function Cart() {
                 </button>
                 <h1>Заказ</h1>
             </div>
-            <div className="footer">
-                <button type="button" onClick={sendData}>
-                    <span>Заказать</span>
-                    <span>{`${cartTotalPrice} руб.`}</span>
-                </button>
+            <div className="dishes">
+                {cartDishes.map(dish => (
+                    <DishCard
+                        key={dish.id}
+                        dish={dish}
+                        cart={cart}
+                        inCart
+                    />
+                ))}
             </div>
+            {cartTotalPrice > 0 && (
+                <div className="footer">
+                    <button type="button" onClick={sendData}>
+                        <span>Заказать</span>
+                        <span>{`${cartTotalPrice} руб.`}</span>
+                    </button>
+                </div>
+            )}
         </div>
     )
 }

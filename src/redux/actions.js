@@ -8,6 +8,11 @@ export const removeDishFromCart = dishId => ({
     payload: { dishId },
 })
 
+export const removeAllDishEntriesFromCart = dishId => ({
+    type: 'REMOVE_ALL_DISH_ENTRIES_FROM_CART',
+    payload: { dishId },
+})
+
 export const changeViewMode = viewMode => ({
     type: 'CHANGE_VIEW_MODE',
     payload: { viewMode },

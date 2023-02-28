@@ -5,12 +5,13 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import classNames from 'classnames'
 
+import deleteIcon from 'styles/icons/delete.png'
 import noImg from 'styles/img/no_img.png'
 import 'styles/Menu.scss'
-import { addDishToCart, changeViewMode, removeDishFromCart } from 'redux/actions'
+import { addDishToCart, changeViewMode, removeAllDishEntriesFromCart, removeDishFromCart } from 'redux/actions'
 import { VIEW_MODE_TYPES } from 'redux/reducers'
 
-export function DishCard({ dish, cart }) {
+export function DishCard({ dish, cart, inCart }) {
     const dispatch = useDispatch()
 
     const { id, name, priceInRubles, imgUrl } = dish
@@ -22,6 +23,38 @@ export function DishCard({ dish, cart }) {
 
         return 0
     }, [id, cart])
+
+    if (inCart) {
+        return (
+            <div className="dish-wrapper">
+                <div className="dish">
+                    <img src={imgUrl || noImg} alt={name} />
+                    <div className="top-bottom-wrapper">
+                        <div className="card-top">
+                            <h4>{name}</h4>
+                            <button type="button" onClick={() => { dispatch(removeAllDishEntriesFromCart(id)) }} className="delete-btn">
+                                <img src={deleteIcon} alt="delete" />
+                            </button>
+                        </div>
+                        <div className="card-bottom">
+                            <button className="change-amount-btn" type="button">
+                                <RemoveIcon onClick={() => { dispatch(removeDishFromCart(id)) }} />
+                                <span className={classNames('amount', { 'amount-bold': amount > 0 })}>{amount}</span>
+                                <AddIcon onClick={() => { dispatch(addDishToCart(id)) }} />
+                            </button>
+                            <h4 className="price">
+                                {priceInRubles * amount}
+                                {' '}
+                                руб.
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+                {amount > 0 && <div className="bottom-border" />}
+            </div>
+        )
+    }
 
     return (
         <div className="dish-wrapper">
@@ -49,4 +82,5 @@ export function DishCard({ dish, cart }) {
 DishCard.propTypes = {
     dish: PropTypes.object,
     cart: PropTypes.object,
+    inCart: PropTypes.bool,
 }
