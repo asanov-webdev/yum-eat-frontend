@@ -48,15 +48,22 @@ export function Cart() {
     const sendData = async () => {
         setSendingData(true)
 
-        await fetch(SEND_ORDER_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: formattedData,
-        }).finally(() => {
+        try {
+            const response = await fetch(SEND_ORDER_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: formattedData,
+            })
+            const data = await response.json()
+
+            if (data.status_name === 'IN_PROGRESS') {
+                navigate('/waiting')
+            }
+        } finally {
             setSendingData(false)
-        })
+        }
     }
 
     const cartDishes = useMemo(() => (isEmpty(cart) ? [] : dishes.filter(dish => dish.id in cart)), [cart, dishes])

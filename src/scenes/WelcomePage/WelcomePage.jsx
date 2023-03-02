@@ -20,12 +20,13 @@ export function WelcomePage() {
 
     // Получение данных по блюдам и категориям с сервера
     const getApiData = async () => {
-        const response = await fetch(DISHES_ENDPOINT).then(response => response.json())
+        const response = await fetch(DISHES_ENDPOINT)
+        const data = await response.json()
 
-        const categories = response.categories.map((cat => cat.name))
+        const categories = data.categories.map((cat => cat.name))
         const dishes = []
 
-        response.categories.forEach((cat) => {
+        data.categories.forEach((cat) => {
             cat.dishes.forEach((dish) => {
                 const formattedDish = {
                     id: dish.id,
