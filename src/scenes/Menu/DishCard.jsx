@@ -8,7 +8,7 @@ import classNames from 'classnames'
 import deleteIcon from 'styles/icons/delete.png'
 import noImg from 'styles/img/no_img.png'
 import 'styles/Menu.scss'
-import { addDishToCart, changeViewMode, removeAllDishEntriesFromCart, removeDishFromCart } from 'redux/actions'
+import { addDishToCart, changeViewMode, removeAllDishEntriesFromCart, removeDishFromCart, setInfoDish } from 'redux/actions'
 import { VIEW_MODE_TYPES } from 'redux/reducers'
 
 export function DishCard({ dish, cart, inCart }) {
@@ -59,7 +59,13 @@ export function DishCard({ dish, cart, inCart }) {
     return (
         <div className="dish-wrapper">
             <div className="dish">
-                <div className="click-wrapper" onClick={() => { dispatch(changeViewMode(VIEW_MODE_TYPES.dishInfo)) }}>
+                <div
+                    className="click-wrapper"
+                    onClick={() => {
+                        dispatch(changeViewMode(VIEW_MODE_TYPES.dishInfo))
+                        dispatch(setInfoDish(dish))
+                    }}
+                >
                     <img src={imgUrl || noImg} alt={name} />
                     <h4>{name}</h4>
                     <h4>

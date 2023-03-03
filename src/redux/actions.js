@@ -22,3 +22,8 @@ export const initializeMenu = (dishes, categories) => ({
     type: 'INITIALIZE_MENU',
     payload: { dishes, categories },
 })
+
+export const setInfoDish = dish => ({
+    type: 'SET_INFO_DISH',
+    payload: { dish },
+})

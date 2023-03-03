@@ -7,6 +7,7 @@ export const VIEW_MODE_TYPES = {
 const initialState = {
     cart: {},
     viewMode: VIEW_MODE_TYPES.default,
+    infoDish: {},
     menuDishes: [],
     menuCategories: [],
 }
@@ -46,6 +47,9 @@ const menuReducer = (state = initialState, action = {}) => {
 
         case 'INITIALIZE_MENU':
             return { ...state, menuDishes: action.payload.dishes, menuCategories: action.payload.categories }
+
+        case 'SET_INFO_DISH':
+            return { ...state, infoDish: action.payload.dish }
 
         default:
             return state

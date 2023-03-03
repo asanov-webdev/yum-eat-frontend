@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import searchIcon from 'styles/icons/search.png'
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
-import infoImg from 'styles/img/info_img.png'
 import { changeViewMode } from 'redux/actions'
 import { VIEW_MODE_TYPES } from 'redux/reducers'
 
@@ -27,6 +26,7 @@ export function Menu() {
     const viewMode = useSelector(state => state.viewMode)
     const dishes = useSelector(state => state.menuDishes)
     const categories = useSelector(state => state.menuCategories)
+    const infoDish = useSelector(state => state.infoDish)
 
     const [activeCategories, setActiveCategories] = useState([])
     const [searchValue, setSearchValue] = useState('')
@@ -108,18 +108,13 @@ export function Menu() {
     if (viewMode === VIEW_MODE_TYPES.dishInfo) {
         return (
             <div className="menu-wrapper info-mode">
-                {/* {sendingData && (
-                    <div className="loader-wrapper">
-                        <CircularProgress />
-                    </div>
-                )} */}
                 <div className="header">
                     <h1>Меню</h1>
                 </div>
                 <div className="info-wrapper">
-                    <h2>Название пиццы</h2>
-                    <img src={infoImg} alt="infoImg" />
-                    <p>{mockDishDescription}</p>
+                    <h2>{infoDish.name}</h2>
+                    <img src={infoDish.imgUrl} alt="img" />
+                    <p>{infoDish.description || mockDishDescription}</p>
                     <p className="text-bold">
                         Ингредиенты, калорийность, БЖУ
                     </p>
@@ -137,11 +132,6 @@ export function Menu() {
 
     return (
         <div className="menu-wrapper">
-            {/* {sendingData && (
-                <div className="loader-wrapper">
-                    <CircularProgress />
-                </div>
-            )} */}
             <div className="header">
                 <h1>Меню</h1>
                 <button onClick={() => { dispatch(changeViewMode(VIEW_MODE_TYPES.search)) }} type="button">
