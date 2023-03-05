@@ -49,7 +49,7 @@ export function Cart() {
         setSendingData(true)
 
         try {
-            const response = await fetch(SEND_ORDER_ENDPOINT, {
+            const response = await fetch(`${SEND_ORDER_ENDPOINT}/6/307124b5-b66b-4414-968d-7fa07f9d41d5/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

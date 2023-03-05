@@ -20,7 +20,7 @@ export function WelcomePage() {
 
     // Получение данных по блюдам и категориям с сервера
     const getApiData = async () => {
-        const response = await fetch(DISHES_ENDPOINT)
+        const response = await fetch(`${DISHES_ENDPOINT}/6/307124b5-b66b-4414-968d-7fa07f9d41d5`)
         const data = await response.json()
 
         const categories = data.categories.map((cat => cat.name))
@@ -47,6 +47,7 @@ export function WelcomePage() {
 
     useEffect(() => {
         getApiData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
