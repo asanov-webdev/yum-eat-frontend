@@ -17,9 +17,9 @@ export const cleanCart = () => ({
     type: 'CLEAN_CART',
 })
 
-export const initializeMenu = (dishes, categories) => ({
+export const initializeMenu = (dishes, categories, restaurantId, tableId) => ({
     type: 'INITIALIZE_MENU',
-    payload: { dishes, categories },
+    payload: { dishes, categories, restaurantId, tableId },
 })
 
 export const setInfoDish = dish => ({

@@ -9,6 +9,8 @@ const initialState = {
     infoDish: {},
     menuDishes: [],
     menuCategories: [],
+    restaurantId: -1,
+    tableId: -1,
 }
 
 const menuReducer = (state = initialState, action = {}) => {
@@ -45,7 +47,13 @@ const menuReducer = (state = initialState, action = {}) => {
             return { ...state, cart: {} }
 
         case 'INITIALIZE_MENU':
-            return { ...state, menuDishes: action.payload.dishes, menuCategories: action.payload.categories }
+            return {
+                ...state,
+                menuDishes: action.payload.dishes,
+                menuCategories: action.payload.categories,
+                restaurantId: action.payload.restaurantId,
+                tableId: action.payload.tableId,
+            }
 
         case 'SET_INFO_DISH':
             return { ...state, infoDish: action.payload.dish }

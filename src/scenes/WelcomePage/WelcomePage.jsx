@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import 'styles/WelcomePage.scss'
 import { useDispatch } from 'react-redux'
@@ -9,8 +9,9 @@ import { initializeMenu } from 'redux/actions'
 import { DISHES_ENDPOINT, WELCOME_PAGE_WAITING_TIME_IN_SECONDS } from './constants'
 
 export function WelcomePage() {
-    const dispatch = useDispatch()
+    const { restaurantId, tableId } = useParams()
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [waitingTimePassed, setWaitingTimePassed] = useState(false)
@@ -20,7 +21,7 @@ export function WelcomePage() {
 
     // Получение данных по блюдам и категориям с сервера
     const getApiData = async () => {
-        const response = await fetch(`${DISHES_ENDPOINT}/6/307124b5-b66b-4414-968d-7fa07f9d41d5`)
+        const response = await fetch(`${DISHES_ENDPOINT}/${restaurantId}/${tableId}`)
         const data = await response.json()
 
         const categories = data.categories.map((cat => cat.name))
@@ -40,7 +41,7 @@ export function WelcomePage() {
             })
         })
 
-        dispatch(initializeMenu(dishes, categories))
+        dispatch(initializeMenu(dishes, categories, restaurantId, tableId))
 
         setDataIsLoaded(true)
     }
@@ -76,7 +77,7 @@ export function WelcomePage() {
             <div className="info-block">
                 <h1 className="app-title app-title-primary">Yum-eat</h1>
                 <h2 className="app-title app-title-secondary">Food location</h2>
-                <p className="table-info">Ваш столик №17</p>
+                <p className="table-info">Добро пожаловать!</p>
                 <div className="loader-wrapper">
                     <CircularProgress />
                 </div>

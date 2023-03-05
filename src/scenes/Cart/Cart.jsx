@@ -18,6 +18,8 @@ export function Cart() {
 
     const cart = useSelector(state => state.cart)
     const dishes = useSelector(state => state.menuDishes)
+    const restaurantId = useSelector(state => state.restaurantId)
+    const tableId = useSelector(state => state.tableId)
 
     const [sendingData, setSendingData] = useState(false)
 
@@ -52,7 +54,7 @@ export function Cart() {
         setSendingData(true)
 
         try {
-            const response = await fetch(`${SEND_ORDER_ENDPOINT}/6/307124b5-b66b-4414-968d-7fa07f9d41d5/`, {
+            const response = await fetch(`${SEND_ORDER_ENDPOINT}/${restaurantId}/${tableId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

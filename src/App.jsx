@@ -15,7 +15,7 @@ function App() {
         <Provider store={store}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<WelcomePage />} />
+                    <Route path="/:restaurantId/:tableId" element={<WelcomePage />} />
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/info" element={<DishInfo />} />
                     <Route path="/search" element={<Search />} />
