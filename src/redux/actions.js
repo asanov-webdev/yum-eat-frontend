@@ -13,6 +13,10 @@ export const removeAllDishEntriesFromCart = dishId => ({
     payload: { dishId },
 })
 
+export const cleanCart = () => ({
+    type: 'CLEAN_CART',
+})
+
 export const initializeMenu = (dishes, categories) => ({
     type: 'INITIALIZE_MENU',
     payload: { dishes, categories },

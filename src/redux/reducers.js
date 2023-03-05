@@ -41,6 +41,9 @@ const menuReducer = (state = initialState, action = {}) => {
 
             return { ...state, cart: newCart }
 
+        case 'CLEAN_CART':
+            return { ...state, cart: {} }
+
         case 'INITIALIZE_MENU':
             return { ...state, menuDishes: action.payload.dishes, menuCategories: action.payload.categories }
 

@@ -1,6 +1,23 @@
 .cart-wrapper {
   height: 100vh;
 
+  .empty-cart-line {
+    margin: 0;
+    font-family: "TT Firs Neue";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: -0.333333px;
+
+    color: #000000;
+
+    margin-top: 25px;
+  }
+
   .header {
     display: flex;
     justify-content: flex-start;

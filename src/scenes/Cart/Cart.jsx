@@ -1,17 +1,19 @@
 import React, { useMemo, useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import 'styles/Cart.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import isEmpty from 'lodash/isEmpty'
 
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
 import { DishCard } from 'scenes/Menu/DishCard'
+import { cleanCart } from 'redux/actions'
 
 import { SEND_ORDER_ENDPOINT } from './constants'
 
 export function Cart() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
     const dishes = useSelector(state => state.menuDishes)
@@ -63,6 +65,7 @@ export function Cart() {
             }
         } finally {
             setSendingData(false)
+            dispatch(cleanCart())
         }
     }
 
@@ -81,6 +84,7 @@ export function Cart() {
                 </button>
                 <h1>Заказ</h1>
             </div>
+            {cartDishes.length < 1 && <h1 className="empty-cart-line">Корзина пуста</h1>}
             <div className="dishes">
                 {cartDishes.map(dish => (
                     <DishCard

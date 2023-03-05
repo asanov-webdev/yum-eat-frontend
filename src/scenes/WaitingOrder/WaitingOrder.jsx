@@ -11,7 +11,7 @@ export function WaitingOrder() {
     return (
         <div>
             <div className="header">
-                <button type="button" onClick={() => navigate('/menu')}>
+                <button type="button" onClick={() => navigate('/cart')}>
                     <img src={arrowLeftIcon} alt="back" />
                 </button>
                 <h1>Заказ</h1>
