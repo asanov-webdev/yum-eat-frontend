@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import classNames from 'classnames'
+import { useNavigate } from 'react-router-dom'
 
 import deleteIcon from 'styles/icons/delete.png'
 import noImg from 'styles/img/no_img.png'
@@ -13,6 +14,7 @@ import { VIEW_MODE_TYPES } from 'redux/reducers'
 
 export function DishCard({ dish, cart, inCart }) {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { id, name, priceInRubles, imgUrl } = dish
 
@@ -23,6 +25,10 @@ export function DishCard({ dish, cart, inCart }) {
 
         return 0
     }, [id, cart])
+
+    const redirectToDishInfo = () => {
+        navigate('/info')
+    }
 
     if (inCart) {
         return (
@@ -64,6 +70,7 @@ export function DishCard({ dish, cart, inCart }) {
                     onClick={() => {
                         dispatch(changeViewMode(VIEW_MODE_TYPES.dishInfo))
                         dispatch(setInfoDish(dish))
+                        redirectToDishInfo()
                     }}
                 >
                     <img src={imgUrl || noImg} alt={name} />

@@ -12,7 +12,6 @@ import { changeViewMode } from 'redux/actions'
 import { VIEW_MODE_TYPES } from 'redux/reducers'
 
 import { DishCard } from './DishCard'
-import { mockDishDescription } from './mock'
 
 const SEARCH_MIN_LENGTH = 2
 const SEARCH_DELAY_IN_MILLISECONDS = 300
@@ -26,7 +25,6 @@ export function Menu() {
     const viewMode = useSelector(state => state.viewMode)
     const dishes = useSelector(state => state.menuDishes)
     const categories = useSelector(state => state.menuCategories)
-    const infoDish = useSelector(state => state.infoDish)
 
     const [activeCategories, setActiveCategories] = useState([])
     const [searchValue, setSearchValue] = useState('')
@@ -101,31 +99,6 @@ export function Menu() {
                         </div>
                     )}
                 </div>
-            </div>
-        )
-    }
-
-    if (viewMode === VIEW_MODE_TYPES.dishInfo) {
-        return (
-            <div className="menu-wrapper info-mode">
-                <div className="header">
-                    <h1>Меню</h1>
-                </div>
-                <div className="info-wrapper">
-                    <h2>{infoDish.name}</h2>
-                    <img src={infoDish.imgUrl} alt="img" />
-                    <p>{infoDish.description || mockDishDescription}</p>
-                    <p className="text-bold">
-                        Ингредиенты, калорийность, БЖУ
-                    </p>
-                </div>
-                {!isEmpty(cart) && (
-                    <div className="footer">
-                        <button type="button" onClick={redirectToCart}>
-                            <span>В корзину</span>
-                        </button>
-                    </div>
-                )}
             </div>
         )
     }
