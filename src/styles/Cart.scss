@@ -61,6 +61,10 @@
       position: relative;
       width: 100%;
 
+      &:last-of-type {
+        margin-bottom: 16px;;
+      }
+
       .dish {
         width: 290px;
         height: 90px;
@@ -92,7 +96,7 @@
               border: none;
               background: inherit;
               position: relative;
-              left: 45px;
+              left: 43px;
 
               img {
                 width: 20px;
@@ -195,11 +199,14 @@
     justify-content: center;
     align-items: center;
     padding: 0 20px 20px 20px;
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 337px;
     z-index: 2;
+
+    &-fixed {
+      position: fixed;
+    }
 
     button {
       display: flex;

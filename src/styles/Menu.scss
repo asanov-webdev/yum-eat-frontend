@@ -170,6 +170,22 @@
     padding: 19px 29px;
     padding-bottom: 0;
 
+    &-with-low-footer {
+      .dish-wrapper {
+        &:last-of-type {
+          margin-bottom: 73px !important;
+        }
+      }
+    }
+
+    &-with-footer {
+      .dish-wrapper {
+        &:last-of-type {
+          margin-bottom: 12px;
+        }
+      }
+    }
+
     .dish-wrapper {
       position: relative;
       width: 100%;

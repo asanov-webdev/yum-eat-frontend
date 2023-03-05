@@ -54,9 +54,7 @@ export function DishCard({ dish, cart, inCart }) {
                             </h4>
                         </div>
                     </div>
-
                 </div>
-                {amount > 0 && <div className="bottom-border" />}
             </div>
         )
     }

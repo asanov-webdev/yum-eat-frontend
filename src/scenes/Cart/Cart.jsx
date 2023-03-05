@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import classNames from 'classnames'
 import { CircularProgress } from '@mui/material'
 import 'styles/Cart.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -96,7 +97,7 @@ export function Cart() {
                 ))}
             </div>
             {cartTotalPrice > 0 && (
-                <div className="footer">
+                <div className={classNames('footer', { 'footer-fixed': cartDishes.length < 7 })}>
                     <button type="button" onClick={sendData}>
                         <span>Заказать</span>
                         <span>{`${cartTotalPrice} руб.`}</span>

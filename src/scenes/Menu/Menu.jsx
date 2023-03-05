@@ -63,7 +63,14 @@ export function Menu() {
                     </div>
                 ))}
             </div>
-            <div className="dishes">
+            <div className={classNames(
+                'dishes',
+                {
+                    'dishes-with-low-footer': dishesByCategory.length > 4 && !isEmpty(cart),
+                    'dishes-with-footer': dishesByCategory.length > 4,
+                },
+            )}
+            >
                 {dishesByCategory.map(dish => (
                     <DishCard
                         key={dish.id}
