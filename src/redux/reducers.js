@@ -6,7 +6,6 @@ export const VIEW_MODE_TYPES = {
 
 const initialState = {
     cart: {},
-    viewMode: VIEW_MODE_TYPES.default,
     infoDish: {},
     menuDishes: [],
     menuCategories: [],
@@ -14,7 +13,7 @@ const initialState = {
 
 const menuReducer = (state = initialState, action = {}) => {
     const newCart = { ...state.cart }
-    const { dishId, viewMode } = action.payload || {}
+    const { dishId } = action.payload || {}
 
     switch (action.type) {
         case 'ADD_DISH_TO_CART':
@@ -41,9 +40,6 @@ const menuReducer = (state = initialState, action = {}) => {
             delete newCart[dishId]
 
             return { ...state, cart: newCart }
-
-        case 'CHANGE_VIEW_MODE':
-            return { ...state, viewMode }
 
         case 'INITIALIZE_MENU':
             return { ...state, menuDishes: action.payload.dishes, menuCategories: action.payload.categories }

@@ -13,11 +13,6 @@ export const removeAllDishEntriesFromCart = dishId => ({
     payload: { dishId },
 })
 
-export const changeViewMode = viewMode => ({
-    type: 'CHANGE_VIEW_MODE',
-    payload: { viewMode },
-})
-
 export const initializeMenu = (dishes, categories) => ({
     type: 'INITIALIZE_MENU',
     payload: { dishes, categories },
