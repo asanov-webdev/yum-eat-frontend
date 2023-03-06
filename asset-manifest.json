@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/yum-eat-frontend/static/css/main.bf488b85.css",
-    "main.js": "/yum-eat-frontend/static/js/main.9244ecde.js",
+    "main.js": "/yum-eat-frontend/static/js/main.910cd758.js",
     "static/media/Inter-Medium.ttf": "/yum-eat-frontend/static/media/Inter-Medium.7682fdab91479338a4d5.ttf",
     "static/media/TTFirsNeue-Medium.ttf": "/yum-eat-frontend/static/media/TTFirsNeue-Medium.c40de9018ca2adfa67af.ttf",
     "static/media/TTFirsNeue-Bold.ttf": "/yum-eat-frontend/static/media/TTFirsNeue-Bold.0e5c24bc12f0df7821a9.ttf",
@@ -9,10 +9,10 @@
     "static/media/waiting.png": "/yum-eat-frontend/static/media/waiting.023bd1f33af866d53334.png",
     "index.html": "/yum-eat-frontend/index.html",
     "main.bf488b85.css.map": "/yum-eat-frontend/static/css/main.bf488b85.css.map",
-    "main.9244ecde.js.map": "/yum-eat-frontend/static/js/main.9244ecde.js.map"
+    "main.910cd758.js.map": "/yum-eat-frontend/static/js/main.910cd758.js.map"
   },
   "entrypoints": [
     "static/css/main.bf488b85.css",
-    "static/js/main.9244ecde.js"
+    "static/js/main.910cd758.js"
   ]
 }
