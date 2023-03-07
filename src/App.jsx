@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import { Cart } from 'scenes/Cart/Cart'
 import { Menu } from 'scenes/Menu/Menu'
@@ -13,7 +13,7 @@ import store from 'redux/store'
 function App() {
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/:restaurantId/:tableId" element={<WelcomePage />} />
                     <Route path="/menu" element={<Menu />} />
@@ -22,7 +22,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/waiting" element={<WaitingOrder />} />
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     )
 }
