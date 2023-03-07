@@ -137,17 +137,22 @@
     justify-content: center;
     border-bottom: 1px solid #d9d9d9;
     padding: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-left: 60px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     .category {
+      flex: 0 0 auto;
       padding: 6px;
       min-width: 64px;
       font-size: 15px;
       line-height: 19px;
       background-color: rgba(101, 100, 219, 0.1);
       border-radius: 10px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
       text-align: center;
 
       &-active {

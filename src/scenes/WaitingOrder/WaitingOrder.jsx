@@ -9,7 +9,7 @@ export function WaitingOrder() {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className="waiting-wrapper">
             <div className="header">
                 <button type="button" onClick={() => navigate('/cart')}>
                     <img src={arrowLeftIcon} alt="back" />

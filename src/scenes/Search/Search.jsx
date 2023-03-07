@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import 'styles/Menu.scss'
-import isEmpty from 'lodash/isEmpty'
 import debounce from 'lodash.debounce'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
 import { DishCard } from 'scenes/Menu/DishCard'
+import { useCartTotalPrice } from 'customHooks/useCartTotalPrice'
 
 const SEARCH_MIN_LENGTH = 2
 const SEARCH_DELAY_IN_MILLISECONDS = 300
@@ -17,6 +17,8 @@ export function Search() {
 
     const cart = useSelector(state => state.cart)
     const dishes = useSelector(state => state.menuDishes)
+
+    const cartTotalPrice = useCartTotalPrice()
 
     const [searchValue, setSearchValue] = useState('')
     const [dishesBySearchValue, setDishesBySearchValue] = useState([])
@@ -77,10 +79,11 @@ export function Search() {
                         ))}
                     </div>
                 ) : <div className="filtered-dishes-placeholder"><p>Введите название блюда</p></div>}
-                {!isEmpty(cart) && (
+                {cartTotalPrice > 0 && (
                     <div className="footer">
                         <button type="button" onClick={redirectToCart}>
                             <span>В корзину</span>
+                            <span>{`${cartTotalPrice} руб.`}</span>
                         </button>
                     </div>
                 )}

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
 import searchIcon from 'styles/icons/search.png'
+import { useCartTotalPrice } from 'customHooks/useCartTotalPrice'
 
 import { DishCard } from './DishCard'
 
@@ -15,6 +16,8 @@ export function Menu() {
     const cart = useSelector(state => state.cart)
     const dishes = useSelector(state => state.menuDishes)
     const categories = useSelector(state => state.menuCategories)
+
+    const cartTotalPrice = useCartTotalPrice()
 
     const [activeCategories, setActiveCategories] = useState([])
 
@@ -79,10 +82,11 @@ export function Menu() {
                     />
                 ))}
             </div>
-            {!isEmpty(cart) && (
+            {cartTotalPrice > 0 && (
                 <div className="footer">
                     <button type="button" onClick={redirectToCart}>
                         <span>В корзину</span>
+                        <span>{`${cartTotalPrice} руб.`}</span>
                     </button>
                 </div>
             )}

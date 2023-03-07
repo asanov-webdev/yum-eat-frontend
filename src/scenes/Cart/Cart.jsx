@@ -9,6 +9,7 @@ import isEmpty from 'lodash/isEmpty'
 import arrowLeftIcon from 'styles/icons/arrow_left.png'
 import { DishCard } from 'scenes/Menu/DishCard'
 import { cleanCart } from 'redux/actions'
+import { useCartTotalPrice } from 'customHooks/useCartTotalPrice'
 
 import { SEND_ORDER_ENDPOINT } from './constants'
 
@@ -20,6 +21,8 @@ export function Cart() {
     const dishes = useSelector(state => state.menuDishes)
     const restaurantId = useSelector(state => state.restaurantId)
     const tableId = useSelector(state => state.tableId)
+
+    const cartTotalPrice = useCartTotalPrice()
 
     const [sendingData, setSendingData] = useState(false)
 
@@ -36,18 +39,6 @@ export function Cart() {
         })
 
         return JSON.stringify({ orders })
-    }, [cart])
-
-    const cartTotalPrice = useMemo(() => {
-        let totalPrice = 0
-
-        Object.entries(cart).forEach(([id, amount]) => {
-            // eslint-disable-next-line eqeqeq
-            totalPrice += dishes.find(dish => dish.id == id).priceInRubles * amount
-        })
-
-        return totalPrice
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
     const sendData = async () => {
