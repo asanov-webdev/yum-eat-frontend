@@ -54,7 +54,7 @@ export function Cart() {
             })
             const data = await response.json()
 
-            if (data.status_name === 'IN_PROGRESS') {
+            if (data.status_name === 'IN_PROGRESS' || data.status_name === 'SUCCESS') {
                 navigate('/waiting')
             }
         } finally {
