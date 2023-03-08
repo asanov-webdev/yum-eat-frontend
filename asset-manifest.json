@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/yum-eat-frontend/static/css/main.06cab4fb.css",
-    "main.js": "/yum-eat-frontend/static/js/main.a8d58978.js",
+    "main.css": "/yum-eat-frontend/static/css/main.8ae0e2d6.css",
+    "main.js": "/yum-eat-frontend/static/js/main.c29ad7ae.js",
     "static/media/Inter-Medium.ttf": "/yum-eat-frontend/static/media/Inter-Medium.7682fdab91479338a4d5.ttf",
     "static/media/TTFirsNeue-Medium.ttf": "/yum-eat-frontend/static/media/TTFirsNeue-Medium.c40de9018ca2adfa67af.ttf",
     "static/media/TTFirsNeue-Bold.ttf": "/yum-eat-frontend/static/media/TTFirsNeue-Bold.0e5c24bc12f0df7821a9.ttf",
     "static/media/TTFirsNeue-Regular.ttf": "/yum-eat-frontend/static/media/TTFirsNeue-Regular.7925664aab1bc42bbc9b.ttf",
     "static/media/waiting.png": "/yum-eat-frontend/static/media/waiting.023bd1f33af866d53334.png",
     "index.html": "/yum-eat-frontend/index.html",
-    "main.06cab4fb.css.map": "/yum-eat-frontend/static/css/main.06cab4fb.css.map",
-    "main.a8d58978.js.map": "/yum-eat-frontend/static/js/main.a8d58978.js.map"
+    "main.8ae0e2d6.css.map": "/yum-eat-frontend/static/css/main.8ae0e2d6.css.map",
+    "main.c29ad7ae.js.map": "/yum-eat-frontend/static/js/main.c29ad7ae.js.map"
   },
   "entrypoints": [
-    "static/css/main.06cab4fb.css",
-    "static/js/main.a8d58978.js"
+    "static/css/main.8ae0e2d6.css",
+    "static/js/main.c29ad7ae.js"
   ]
 }
